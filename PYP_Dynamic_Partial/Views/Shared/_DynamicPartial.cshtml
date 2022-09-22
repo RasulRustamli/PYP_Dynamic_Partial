@@ -1,0 +1,44 @@
+﻿@model Object
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_DynamicPartial</title>
+</head>
+<body>
+<div class="row">
+    @if (Model is IEnumerable<object>)
+    {
+        <div class="col-5">
+        @foreach (var item in (IEnumerable<object>)Model)
+        {
+            @foreach (var prop in item.GetType().GetProperties())
+            {
+                
+                    <p>@(prop.GetValue(item))</p>
+               
+            }
+        }
+         </div>
+    }
+    else
+    {
+        <div class="col-5">
+        @foreach (var prop in Model.GetType().GetProperties())
+        {
+            
+                <p>@(prop.GetValue(Model))</p>
+        }
+            </div>
+
+    }
+</div>
+
+
+</body>
+</html>
